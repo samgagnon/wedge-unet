@@ -4,9 +4,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("ggplot")
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 %matplotlib inline
 >>>>>>> 51a18f3723d5c46b2e4fd1eb8ded0efd68993eb5
+=======
+>>>>>>> cce32fa6336d918808a0e960df9c3207479866bc
 
 from utils import *
 from config import *

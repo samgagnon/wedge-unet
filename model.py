@@ -3,7 +3,6 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("ggplot")
-%matplotlib inline
 
 from utils import *
 from config import *

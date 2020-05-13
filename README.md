@@ -16,9 +16,13 @@ A UNet for recovering 21cm intensity information lost to "The Wedge".
 ## Files
 * **config.py** - Contains the settings on variables relevant to the rest of the code. This should be the only file you need to edit to run the code.
 
-* **model.py** - The definition of the network model.
+* **model.py** - The definition of the 2D network model.
 
-* **train.py** - Use this to train the network from scratch or to continue training.
+* **train.py** - Use this to train the 2D network from scratch or to continue training.
+
+* **model3d.py**  - The definition of the 3D network model.
+
+* **train3d.py** - Use this to train the 3D network from scratch or to continue training.
 
 * **utils.py** - Miscellaneous utilities used in the code. 
 

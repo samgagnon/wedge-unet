@@ -14,7 +14,7 @@ A UNet for recovering 21cm intensity information lost to "The Wedge".
 * **scikit-learn**
 
 ## Folders
-* **2d_unet** - Contains the 2D version of this code, as well as a file called ``img_slicer.py``. The files should be kept in the same directory as the ``/images/`` and ``/masks/`` folders. These folders should contain 2D slices of the images and their associated masks, named from ``0.png`` to ``n.png``. ``img_slicer.py`` should be kept in a directory called ``/src/`` which is parallel to the data directory ``/data/``, which should be organized as specified at the end of the readme.
+* **2d_unet** - Contains the 2D version of this code, as well as a file called ``img_maker.py``. The files should be kept in the same directory as the ``/images/`` and ``/masks/`` folders. These folders should contain 2D slices of the images and their associated masks, named from ``0.png`` to ``n.png``. ``img_maker.py`` should be kept in a directory called ``/src/`` which is parallel to the data directory ``/data/``, which should be organized as specified at the end of the readme.
 
 ## Files
 * **config.py** - Contains the settings on variables relevant to the rest of the code. This should be the only file you need to edit to run the code.

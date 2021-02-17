@@ -13,7 +13,7 @@ A UNet for recovering 21cm intensity information lost to "The Wedge".
 * **scikit-learn**
 
 ## Folders
-* **2d_unet** - Contains the 2D version of this code, as well as a file called ``img_maker.py``. The files should be kept in the same directory as the ``/images/`` and ``/masks/`` folders. These folders should contain 2D slices of the images and their associated masks, named from ``0.png`` to ``n.png``. ``img_maker.py`` should be kept in a directory called ``/src/`` which is parallel to the data directory ``/data/``, which should be organized as specified at the end of the readme. The 2D version of the U-Net is older, and depends on keras.
+* **2d_unet** - Contains the 2D version of this code, as well as a file called ``img_maker.py``. The files should be kept in the same directory as the ``/images/`` and ``/masks/`` folders. These folders should contain 2D slices of the images and their associated masks, named from ``0.png`` to ``n.png``. ``img_maker.py`` should be kept in a directory called ``/src/`` which is parallel to the data directory ``/data/``, which should be organized as specified at the end of the readme. The 2D version of the U-Net is no longer being maintained, and depends on keras.
 
 ## Files
 * **config.py** - Contains the settings on variables relevant to the rest of the code. This should be the only file you need to edit to run the code.
@@ -30,7 +30,7 @@ A UNet for recovering 21cm intensity information lost to "The Wedge".
 
 * **plot.py** - Various utilities used in the visualization of the network outputs.
 
-* ****
+* **crossCorrelation.py** - Edit the file locations within the file to tell it which data to cross-correlate, then run the script to generate a cross-correlation plot.
 
 ## Training the Network
 

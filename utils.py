@@ -1,3 +1,4 @@
+import numpy as np
 import re
 import sys
 
@@ -27,6 +28,9 @@ def load_binary_data(filename, dtype=np.float32):
     return _data
 
 def shape_data(dimension, data):
+    """
+    Reshapes 3D data into cube.
+    """
     data.shape = (dimension, dimension, dimension)
     data = data.reshape((dimension, dimension, dimension), order='F')
     return data

@@ -55,7 +55,7 @@ for n, id_ in tqdm(enumerate(ids), total=len(ids)):
     mask = resize(mask, (128, 128, 128, 1), mode='constant', preserve_range=True)
     # Save images
     X[n] = x_img
-    y[n] = mask == 0
+    y[n] = mask# == 0 no binarization for stats loss function!
 
 # split training and validation sets
 X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size=0.10, shuffle=False)

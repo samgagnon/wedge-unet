@@ -1,4 +1,6 @@
 import tensorflow.keras.backend as K
+import numpy as np
+import scipy.stats as stats
 
 from functools import partial
 
@@ -87,12 +89,44 @@ def dice_coefficient(y_true, y_pred, smooth=1.):
 def dice_coefficient_loss(y_true, y_pred):
     return -dice_coefficient(y_true, y_pred)
 
+
+# it is notable that large swathes of a 21cm co-eval cube are zeros, while will
+# impact the values of these statistics. However, we should not cut out the zeros
+# since the prediction produced by the network is unlikely to match the number of zero
+# voxels.
+# It may be of interest to compute a fifth statistic, which would either be the true
+# neutral fraction of the co-eval cube, or the number of zero voxels.
+def stats_chi2(y_true, y_pred):
+    """
+    Compute statistical moments for true and predicted data.
+    """
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    true_stats = [stats.moment(y_true_f, 1),
+        stats.moment(y_true_f, 2),
+        stats.moment(y_true_f, 3),
+        stats.moment(y_true_f, 4)]
+    pred_stats = [stats.moment(y_pred_f, 1),
+        stats.moment(y_pred_f, 2),
+        stats.moment(y_pred_f, 2),
+        stats.moment(y_pred_f, 4)]
+    return true_stats, pred_stats
+
+
+def stats_chi2_loss(y_true, y_pred):
+    """
+    Compute loss from Chi2 of statistical moments
+    """
+    true_stats, pred_stats = stats_chi2(y_true, y_pred)
+    return np.sum(((pred_stats - true_stats) / true_stats) ** 2)
+
+
 create_convolution_block = partial(create_convolution_block, activation=LeakyReLU, instance_normalization=True)
 
 
 def isensee2017_model(inputs, n_base_filters=16, depth=5, dropout_rate=0.3,
                       n_segmentation_levels=3, n_labels=1, optimizer=Adam, initial_learning_rate=5e-4,
-                      loss_function=dice_coefficient_loss, activation_name="sigmoid"):
+                      loss_function=stats_chi2_loss, activation_name="sigmoid"):
     """
     This function builds a model proposed by Isensee et al. for the BRATS 2017 competition:
     https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/MICCAI_BraTS_2017_proceedings_shortPapers.pdf

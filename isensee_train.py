@@ -49,21 +49,21 @@ y = np.zeros((len(ids), im_height, im_width, im_depth, 1), dtype=np.float32)
 for n, id_ in tqdm(enumerate(ids), total=len(ids)):
     # Load images
     # x_img = load_binary_data("../../GitHub/wedge-unet/bar2/bar-2-" + id_, np.float64)
-    x_img = load_binary_data("SKA_images/bar-2-chop-SKAsky-" + id_, np.float32)
+    x_img = load_binary_data("images3d/sweep-10-" + id_, np.float32)
     x_img = x_img.reshape((128,128,128,1))
     # x_img = tf.expand_dims(x_img, 3)
     x_img = x_img - x_img.min()
     x_img = x_img / x_img.max()
     x_img = resize(x_img, (im_height, im_width, im_depth, 1), mode='symmetric', preserve_range=True)
     # Load masks
-    mask = load_binary_data("SKA_masks/chop-SKAinterp-" + id_, dtype=np.float64)
+    mask = load_binary_data("masks3d/" + id_, dtype=np.float32)
     # mask = load_binary_data("../../GitHub/wedge-unet/masks3d/" + id_)
     mask = mask.reshape((128,128,128,1))
     # mask = tf.expand_dims(mask, 3)
     mask = resize(mask, (im_height, im_width, im_depth, 1), mode='symmetric', preserve_range=True)
     # Save images
     X[n] = x_img # add the /255 if necessary
-    y[n] = mask < 0.9
+    y[n] = mask #< 0.9 no binarization of masks for stats loss function!
 
 print("ALL FILES LOADED")
 
